@@ -4,14 +4,14 @@ import Card from "./Card";
 
 
 /** Carousel: displays images and arrows to navigate through them
- * 
+ *
  * Props:
  * - photos: array of {src, caption} objects
  * - title: string describing the collection of images
- * 
+ *
  * State:
  * - currCardIdx: integer for current card index
- * 
+ *
  * App --> Carousel --> Card
  */
  function Carousel({ photos, title }) {
@@ -25,24 +25,32 @@ import Card from "./Card";
     setCurrCardIdx(currCardIdx + 1);
   }
 
+  function goBack() {
+    setCurrCardIdx(currCardIdx -1);
+  }
+
   return (
     <div className="Carousel">
       <h1>{title}</h1>
       <div className="Carousel-main">
+        {currCardIdx !== 0 &&
         <i
           className="bi bi-arrow-left-circle"
-          onClick={goForward}
+          onClick={goBack}
         />
+        }
         <Card
           caption={currCard.caption}
           src={currCard.src}
           currNum={currCardIdx + 1}
           totalNum={total}
         />
+        {currCardIdx !== 2 &&
         <i
-          className="bi bi-arrow-right-circle"
-          onClick={goForward}
-        />
+        className="bi bi-arrow-right-circle"
+        onClick={goForward}
+      />
+        }
       </div>
     </div>
   );
